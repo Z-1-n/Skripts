@@ -1,0 +1,37 @@
+# Clientside glow
+# Created with some help from people on the minehut discord (djdisaster, Hipoman)
+# Zin__
+
+function glow(e: entity, p: player): # <---- You can use this function to set a specific entity to glow. 
+    set {_entity-id} to {_e}.getEntityId()
+
+    set {_data::1} to new DataValue(0, EntityDataSerializers.a, 64.byteValue())
+    set {_data} to List.of({_data::*})
+
+    set {_packet} to new ClientboundSetEntityDataPacket({_entity-id}, {_data})
+
+    {_p}.getHandle().c.a({_packet})
+
+
+function resetglow(e: entity, p: player): # <---- You can use this function to reset the client-side glow of the entity.
+    set {_entity-id} to {_e}.getEntityId()
+
+    set {_data::1} to new DataValue(0, EntityDataSerializers.a, 0.byteValue())
+    set {_data} to List.of({_data::*})
+
+    set {_packet} to new ClientboundSetEntityDataPacket({_entity-id}, {_data})
+
+    {_p}.getHandle().c.a({_packet})
+
+
+# How do I change the color? 
+
+# You can set the team of the entity, with it's color, in turn changing the glow.
+# If you're using block or item displays you can use this: https://skripthub.net/docs/?id=8864
+# Note: "bukkitcolor" is set out in the format:
+# a = alpha
+# r = red
+# g = green
+# b = blue
+# bukkitcolor(a,r,g,b) 
+# (see https://skripthub.net/docs/?id=8891)
